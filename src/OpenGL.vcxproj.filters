@@ -12,6 +12,7 @@
     <ClInclude Include="VertexArray.hpp" />
     <ClInclude Include="VertexBuffer.hpp" />
     <ClInclude Include="VertexBufferLayout.hpp" />
+    <ClInclude Include="thirdparty\stb_image\stb_image.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IndexBuffer.cpp" />
@@ -21,6 +22,7 @@
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexBufferLayout.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="thirdparty\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\BasicShader.shader">

@@ -10,6 +10,7 @@
 #include "Shader.hpp"
 #include "Renderer.hpp"
 #include "VertexBufferLayout.hpp"
+#include "Texture.hpp"
 
 
 int main() {
@@ -18,7 +19,7 @@ int main() {
     if (!glfwInit())
         return -1;
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -69,6 +70,11 @@ int main() {
     float incr3 = 0.03f;
     shader.bind();
     shader.setUniform4f("uniformColor", r, g, b, 1.0f);
+
+    Texture texture("src/resources/texture/texture.jpg");
+    texture.bind();
+    shader.setUniform1i("unifTexture", 0);
+    
     
 
 
@@ -79,6 +85,27 @@ int main() {
 
     Renderer renderer;
     vBuffer.bind();
+
+
+    glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scanCode, int action, int mods) {
+        switch (action) {
+        case GLFW_PRESS:
+            std::cout << "Key Pressed: " << key << ", " << scanCode;
+            break;
+
+        case GLFW_RELEASE:
+            std::cout << "Key Released: " << key << ", " << scanCode;
+            break;
+
+        case GLFW_REPEAT:
+            std::cout << "Key Repeated " << key << ", " << scanCode;
+            break;
+        }
+        });
+
+    glfwSetCursorPosCallback(window, [](GLFWwindow* window, double x, double y) {
+        std::cout << "(" << (float)x << ", " << (float)y << std::endl;
+        });
 
        
 
