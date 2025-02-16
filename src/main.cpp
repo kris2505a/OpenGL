@@ -62,16 +62,8 @@ int main() {
     IndexBuffer iBuffer(indexArray, 6);
 
     Shader shader("shaders/BasicShader.shader");
-    shader.bind(); 
-    float r = 0.0f;
-    float g = 0.0f;
-    float b = 0.0f;
-    float incr2 = 0.02;
-    float incr = 0.05f;
-    float incr3 = 0.03f;
     shader.bind();
 
-    glCall(shader.setUniform4f("uniformColor", r, g, b, 1.0f));
 
     Texture texture("resources/texture/texture.png");
     texture.bind();
@@ -84,7 +76,7 @@ int main() {
     vBuffer.unBind();
     iBuffer.unBind();
     shader.unBind();
-    //texture.unBind();
+    texture.unBind();
 
     Renderer renderer;
     vBuffer.bind();
@@ -117,28 +109,11 @@ int main() {
         renderer.clear();
 
         shader.bind();
-        texture.bind();
-        glCall(shader.setUniform4f("uniformColor", r, g, b, 1.0f));
+        //texture.bind();
 
         renderer.draw(vArray, iBuffer, shader);
 
-        if (r > 1.0f)
-            incr = -0.05f;
-        else if(r < 0.0f)
-            incr = 0.05f;
-        if (g > 1.0f)
-            incr2 = -0.04f;
-        else if (r < 0.0f)
-            incr2 = 0.04f;
-        if (b > 1.0f)
-            incr3 = -0.03f;
-        else if (b < 0.0f)
-            incr3 = 0.03f;
         
-        r += incr;
-        g += incr2;
-        b += incr3;
-
         glfwSwapBuffers(window);
 
         glfwPollEvents();
