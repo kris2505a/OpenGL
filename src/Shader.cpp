@@ -18,8 +18,7 @@ int Shader::getUniformLocation(const std::string& name) {
     glCall(int location = glGetUniformLocation(m_rendererId, name.c_str()));
 
     if (location == -1) {
-        std::cout << "Uniform doesn't exist" << std::endl;
-        exit(0);
+        std::cout << "Uniform doesn't exist: " << name << std::endl;
     }
     m_uniformLocationCache[name] = location;
     return location;
@@ -120,9 +119,16 @@ Shaders Shader::parseShader(const std::string& filePath) {
             ss[(int)type] << line << "\n";
         }
     }
-    std::cout << ss[0].str() << std::endl;
-    std::cout << ss[1].str() << std::endl;
 
     return { ss[0].str(), ss[1].str() };
 }
 
+
+void Shader::setUniform1i(const std::string& name, int value) {
+    glCall(glUniform1i(getUniformLocation(name), value));
+}
+
+void Shader::setUniform1f(const std::string& name, int value) {
+    glCall(glUniform1f(getUniformLocation(name), value));
+
+}

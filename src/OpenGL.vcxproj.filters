@@ -13,6 +13,7 @@
     <ClInclude Include="VertexBuffer.hpp" />
     <ClInclude Include="VertexBufferLayout.hpp" />
     <ClInclude Include="thirdparty\stb_image\stb_image.hpp" />
+    <ClInclude Include="Texture.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IndexBuffer.cpp" />
@@ -23,10 +24,14 @@
     <ClCompile Include="VertexBufferLayout.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="thirdparty\stb_image\stb_image.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\BasicShader.shader">
       <Filter>shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\texture\test.txt" />
   </ItemGroup>
 </Project>

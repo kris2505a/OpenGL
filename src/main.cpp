@@ -44,17 +44,18 @@ int main() {
 
   
 
-    float positions[8] = {  0.5f,  0.5f, 
-                           -0.5f,  0.5f,
-                           -0.5f, -0.5f,
-                            0.5f, -0.5f };
+    float positions[] = {  0.5f,  0.5f, 0.0f, 0.0f,
+                           -0.5f,  0.5f, 1.0f, 0.0f,
+                           -0.5f, -0.5f, 1.0f, 1.0f,
+                            0.5f, -0.5f, 0.0f, 1.0f };
 
     unsigned int indexArray[6] = {1, 2, 3, 0, 1, 3};
 
 
     VertexArray vArray;
-    VertexBuffer vBuffer(positions, 4 * 2 * sizeof(float));
+    VertexBuffer vBuffer(positions, 4 * 4 * sizeof(float));
     VertexBufferLayout vBufferLayout;
+    vBufferLayout.push<float>(2);
     vBufferLayout.push<float>(2);
     vArray.addBuffer(vBuffer, vBufferLayout);
 
@@ -69,9 +70,10 @@ int main() {
     float incr = 0.05f;
     float incr3 = 0.03f;
     shader.bind();
-    shader.setUniform4f("uniformColor", r, g, b, 1.0f);
 
-    Texture texture("src/resources/texture/texture.jpg");
+    glCall(shader.setUniform4f("uniformColor", r, g, b, 1.0f));
+
+    Texture texture("resources/texture/texture.png");
     texture.bind();
     shader.setUniform1i("unifTexture", 0);
     
@@ -82,6 +84,7 @@ int main() {
     vBuffer.unBind();
     iBuffer.unBind();
     shader.unBind();
+    //texture.unBind();
 
     Renderer renderer;
     vBuffer.bind();
@@ -104,7 +107,7 @@ int main() {
         });
 
     glfwSetCursorPosCallback(window, [](GLFWwindow* window, double x, double y) {
-        std::cout << "(" << (float)x << ", " << (float)y << std::endl;
+        std::cout << "(" << (float)x << ", " << (float)y  << ")" << std::endl;
         });
 
        
@@ -114,7 +117,8 @@ int main() {
         renderer.clear();
 
         shader.bind();
-        shader.setUniform4f("uniformColor", r, g, b, 1.0f);
+        texture.bind();
+        glCall(shader.setUniform4f("uniformColor", r, g, b, 1.0f));
 
         renderer.draw(vArray, iBuffer, shader);
 
