@@ -44,12 +44,15 @@ int main() {
 
   
 
-    float positions[] = {  0.5f,  0.5f, 0.0f, 0.0f,
-                           -0.5f,  0.5f, 1.0f, 0.0f,
-                           -0.5f, -0.5f, 1.0f, 1.0f,
-                            0.5f, -0.5f, 0.0f, 1.0f };
+    float positions[] = {  0.4f,  0.4f, 0.0f, 0.0f,
+                           -0.4f,  0.4f, 1.0f, 0.0f,
+                           -0.4f, -0.4f, 1.0f, 1.0f,
+                            0.4f, -0.4f, 0.0f, 1.0f };
 
     unsigned int indexArray[6] = {1, 2, 3, 0, 1, 3};
+
+    glCall(glEnable(GL_BLEND));
+    glCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 
     VertexArray vArray;
@@ -109,7 +112,7 @@ int main() {
         renderer.clear();
 
         shader.bind();
-        //texture.bind();
+        texture.bind();
 
         renderer.draw(vArray, iBuffer, shader);
 
